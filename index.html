@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+
+  <!-- Rating state start -->
+<main>
+  <div class="MainContainer">
+    <div class="evaluate" style="display: block;">
+
+      <picture>
+        <img src="images/icon-star.svg" alt="icon-star">
+      </picture>
+
+      <h1>How did we do?</h1>
+
+      <p>Please let us know how we did with your support request. All feedback is appreciated 
+        to help us improve our offering!</p>   
+  
+      <!-- Botones de calificación con radio buttons -->
+      <form action="submit" method="post">
+        <div class="buttons">
+  
+          <input type="radio" id="rating-1" name="rating" value="1">
+          <label for="rating-1">1</label>
+  
+          <input type="radio" id="rating-2" name="rating" value="2">
+          <label for="rating-2">2</label>
+  
+          <input type="radio" id="rating-3" name="rating" value="3">
+          <label for="rating-3">3</label>
+  
+          <input type="radio" id="rating-4" name="rating" value="4">
+          <label for="rating-4">4</label>
+  
+          <input type="radio" id="rating-5" name="rating" value="5">
+          <label for="rating-5">5</label>
+  
+        </div>
+      <button type="submit"><B>SUBMIT</B></button>
+      </form>
+
+    </div>
+   <!-- Rating state end -->   
+  <!--  Thank you state start  -->
+    <div class="ThanksState" style="display: none;">
+      <picture>
+        <img src="images/illustration-thank-you.svg" alt="illustration-thank-you">
+      </picture>
+      <div class="Quantity">
+      </div>
+      <h1>Thank you!</h1>
+
+      <p>We appreciate you taking the time to give a rating. If you ever need more support, 
+        don’t hesitate to get in touch!</p>
+    </div>
+
+  
+  <!-- Thank you state end -->
+  </div>
+</main>
+
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+
+  <script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (event) {
+      event.preventDefault(); // Previene el envío del formulario para hacer pruebas
+
+      // Obtener todos los botones de radio
+      const radios = document.querySelectorAll('input[name="rating"]');
+      
+      let selectedValue = null;
+      radios.forEach((radio) => {
+        if (radio.checked) {
+          selectedValue = radio.value; // Valor del radio seleccionado
+        }
+      });
+
+      if (selectedValue) {
+        // si hay un valor seleccionado cambiamos a ThankYOU Panel
+        let divThankYou = document.querySelector('.ThanksState');
+        let divOriginal = document.querySelector('.evaluate');
+        divThankYou.style.display="block";
+        divOriginal.style.display="none";
+
+        //agregamos el texto de la calificacion seleccionada
+        // Crear el elemento para la puntuación
+        let divCalif = document.querySelector(".Quantity");
+        let calif = document.createElement('p');
+        calif.innerHTML = `<p>You selected ${selectedValue} out of 5</p>`;
+
+        // Añadir los elementos al contenedor principal
+        divCalif.appendChild(calif);
+      } 
+    });
+  </script>
+
+</body>
+</html>
